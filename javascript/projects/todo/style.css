@@ -1,0 +1,115 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', Verdana, sans-serif;
+    transition: all .2s ease;
+}
+
+html,body {
+    background: #fafafa;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+#app {
+    max-width: 700px;
+    margin: 0 auto;
+    height: 100%;
+    background: #219fa3;
+    padding: 15px;
+}
+
+.actions {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.actions button {
+    background: #187579;
+    line-height: 24px;
+    font-size: 32px;
+    outline: 0;
+    border: 2px solid #187579;
+    color: #fff;
+    padding: 8px;
+    font-weight: bold;
+    min-width: 64px;
+    text-transform: uppercase;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.actions button:active {
+    background: #0c3f41;
+}
+
+.actions input::placeholder {
+    color: #187579;
+}
+
+.actions input {
+    outline: 0;
+    border: 2px solid #187579;
+    line-height: 24px;
+    font-size: 16px;
+    background: transparent;
+    padding: 8px 12px;
+    width: 100%;
+    flex: 1;
+    color: #187579;
+    margin-right: -2px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.actions input:focus {
+    background: #fff;
+    color: #187579;
+    margin-right: 0;
+    border-color: #fff;
+} 
+
+.list-container {
+    padding: 25px;
+}
+
+.list-container ul {
+    list-style: none;
+    padding: 15px;
+}
+
+.list-container ul li {
+    font-size: 16px;
+    line-height: 16px;
+    color: #fff;
+    font-weight: lighter;
+    background: #187579;
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.list-container ul li a {
+    color: rgb(255, 155, 155);
+    background: transparent;
+    border: 1px solid rgb(255, 155, 155);
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 8px;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    text-decoration: none;
+}
+
+.list-container ul li a:hover {
+    color: #fff;
+    background: rgb(255, 155, 155);
+}
+
