@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Exercise 05</title>
+</head>
+<body>
+    <script>
+
+        function logUserSkills(users) {
+            for (var user of users) {
+                console.log(user.name + " has the following skills: " + user.skills.join(', '));
+            }
+        }
+
+        var users = [
+            {
+                name: "Diego",
+                skills: ["Javascript", "ReactJS", "Redux"]
+            },
+            {
+                name: "Gabriel",
+                skills: ["VueJS", "Ruby on Rails", "Elixir"]
+            }
+        ];
+
+        logUserSkills(users)
+
+    </script>
+</body>
+</html>

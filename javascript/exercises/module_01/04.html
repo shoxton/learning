@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Exercise 04</title>
+</head>
+<body>
+    <script>
+
+        function checkExperienceTitle(age) {
+            switch (true) {
+                case age >= 0 && age <= 1:
+                    return "Novice";
+                case age > 1 && age <= 3:
+                    return "Intermediate";
+                case age > 3 && age <= 6:
+                    return "Advanced";
+                case age >= 7:
+                    return "Jedi Master";
+                default:
+                    return "==== Invalid age ===="
+            }
+        }
+
+        console.log(checkExperienceTitle(3))
+
+    </script>
+</body>
+</html>

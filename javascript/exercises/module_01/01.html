@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Exercise 01</title>
+</head>
+<body>
+    <script>
+        
+        var address = {
+            street: "Rua dos pinheiros",
+            ahn: 1293,
+            district: "Centro",
+            city: "São Paulo",
+            state: "SP"
+        };
+
+        function logUserAddressText(address) {
+            return "The user leaves in " + 
+                    address.city + " / " + address.state + 
+                    ", in district " +
+                    address.district + 
+                    ", on street " + 
+                    "'" + address.street + "'" + 
+                    ", with assigned house number " + 
+                    address.ahn + 
+                    "."
+        }
+
+        console.log(logUserAddressText(address))
+
+    </script>
+</body>
+</html>
