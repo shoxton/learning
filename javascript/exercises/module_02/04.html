@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Exercise 04</title>
+</head>
+<body>
+    <input type="text" name="name">
+    <button onClick="add()">Add</button>
+    <div class="container"></div>
+
+    <script>
+
+        var names = ["Diego", "Gabriel", "Lucas"];
+
+        var containerElement = document.querySelector('.container');
+        var unorderedListElement = document.createElement('ul');
+        var inputTextElement = document.querySelector('input[name="name"]');
+
+        containerElement.appendChild(unorderedListElement);
+
+        function createListItem(container,data) {
+            var listItemElement = document.createElement('li');
+            var listItemTextElement = document.createTextNode(data)
+
+            listItemElement.appendChild(listItemTextElement);
+            container.appendChild(listItemElement);
+        }
+
+        function add() {
+            if (inputTextElement.value) {
+                var text = inputTextElement.value;
+                createListItem(unorderedListElement,text)
+                inputTextElement.value = '';
+            }
+        }
+
+        for (name of names) {
+            createListItem(unorderedListElement,name)
+        }
+
+
+    </script>
+</body>
+</html>

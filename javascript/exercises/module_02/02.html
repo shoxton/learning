@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Exercise 02</title>
+</head>
+<body>
+
+    <button id="add-btn">Create new square</button>
+
+    <div class="container" style="display: flex;flex-wrap: wrap"></div>
+
+    <script>
+
+        var squareContainer = document.querySelector('.container');
+        var createBtn = document.querySelector('#add-btn');
+
+        function getRandomColor() {
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        createBtn.onclick = function() {
+
+            var redSquare = document.createElement('div');
+            redSquare.style.width = '100px';
+            redSquare.style.height = '100px';
+            redSquare.style.margin = '5px';
+            redSquare.style.backgroundColor = 'red';
+
+            redSquare.onmouseover = function() {
+                this.style.backgroundColor = getRandomColor()
+            }
+
+            squareContainer.appendChild(redSquare);
+        }
+
+    </script>
+</body>
+</html>

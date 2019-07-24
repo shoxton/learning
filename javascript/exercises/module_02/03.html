@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Exercise 03</title>
+</head>
+<body>
+    
+    <div class="container"></div>
+
+    <script>
+
+        var names = ["Diego", "Gabriel", "Lucas"];
+
+        var containerElement = document.querySelector('.container');
+        var unorderedListElement = document.createElement('ul');
+
+        containerElement.appendChild(unorderedListElement);
+
+        function createListItem(container,data) {
+            var listItemElement = document.createElement('li');
+            var listItemTextElement = document.createTextNode(data)
+
+            listItemElement.appendChild(listItemTextElement);
+            container.appendChild(listItemElement);
+        }
+
+        for (name of names) {
+            createListItem(unorderedListElement,name)
+        }
+
+    </script>
+</body>
+</html>
