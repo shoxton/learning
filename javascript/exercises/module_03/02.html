@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Exercise 02</title>
+</head>
+<body>
+
+    <input type="text" name="user">
+    <button>Fetch</button>
+    <ul></ul>
+
+    <script>
+
+        var inputElement = document.querySelector('input[name="user"]');
+        var btnElement = document.querySelector('button');
+        var listElement = document.querySelector('ul');
+        var repos = [];
+
+        function fetchUserData(user) {
+            return new Promise(function(resolve,reject) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'https://api.github.com/users/'+ user +'/repos')
+                xhr.send(null);
+
+                xhr.onreadystatechange = function() {
+                    if(xhr.readyState == 4) {
+                        if (xhr.status == 200) {
+                            resolve(JSON.parse(xhr.responseText))
+                        } else {
+                            reject('Request error!')
+                        }
+                    }
+                }
+            })
+        }
+
+        function renderRepos(repos) {
+            console.log(repos)
+            listElement.innerHTML = '';
+
+            for (repo of repos) {
+                var listItemElement = document.createElement('li');
+                var listItemLinkElement = document.createElement('a');
+                    listItemLinkElement.setAttribute('href',repo.url);
+                var listItemTextElement = document.createTextNode(repo.full_name);
+
+                listItemLinkElement.appendChild(listItemTextElement);
+                listItemElement.appendChild(listItemLinkElement);
+                listElement.appendChild(listItemElement);
+            }
+        }
+
+        function fetchRepos() {
+            fetchUserData(inputElement.value)
+                .then(function(response) {
+                    repos = response;
+                    renderRepos(repos);
+                })
+        }
+
+        btnElement.onclick = fetchRepos;
+
+        
+    </script>
+</body>
+</html>
