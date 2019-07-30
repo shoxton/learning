@@ -5,11 +5,7 @@ class User {
     }
 
     isAdmin() {
-        if (this.admin) {
-            return this.admin
-        } else {
-            return false;
-        }
+        return this.admin === true;
     }
 
 }
