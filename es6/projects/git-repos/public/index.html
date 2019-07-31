@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basic Webpack/Babel setup</title>
+
+    <style>
+        ul {
+            list-style-type: none;
+            font-family: sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            clear: both;
+            margin-top: 10px;
+            border: 1px solid grey;
+            padding: 10px;
+            background: #fafafa;
+        }
+
+        ul li img {
+            float: left;
+            width: 80px;
+            height: 80px;
+            padding-right: 10px;
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <form id="form-repo">
+        <input type="text" name="repo">
+        <button type="submit" id="btn-repo">Add</button>
+    </form>
+    <ul id="list-repo"></ul>
+
+    <script src="./bundle.js"></script>
+</body>
+</html>
