@@ -19,9 +19,13 @@ class App {
         if (!inputEl.value) return;
 
         try {
+
+            this.setLoading();
+
             const response = await api.get(`/repos/${inputEl.value}`);
-            const { name, description = 'Hello world.', html_url, owner: { avatar_url }} = response.data;
-            console.log(response)
+            const { name, description, html_url, owner: { avatar_url }} = response.data;
+            
+            this.setLoading(false);
     
             this.repositories.push({
                 name,
@@ -29,12 +33,30 @@ class App {
                 avatar_url,
                 html_url,
             })
+
+            inputEl.value = '';
+
+            console.log(this.repositories);
     
             this.render();
 
         } catch (error) {
-            alert("This repo does not exist.")
+            this.setLoading(false);
+            alert("This repository does not exist.")
         }
+    }
+
+    setLoading(loading = true) {
+
+        let loaderEl = document.createElement('span');
+        loaderEl.setAttribute('id','loading');
+
+        if (loading) {
+            this.formEl.appendChild(loaderEl);
+        } else {
+            document.getElementById('loading').remove();
+        }
+
     }
 
     registerHandlers() {
@@ -43,6 +65,7 @@ class App {
     }
 
     render() {
+        
         this.listEl.innerHTML = '';
 
         this.repositories.forEach(repo => {

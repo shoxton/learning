@@ -16,9 +16,10 @@
         ul li {
             clear: both;
             margin-top: 10px;
-            border: 1px solid grey;
+            border: 1px solid #b1b1b1;;
             padding: 10px;
             background: #fafafa;
+            border-radius: 5px;
         }
 
         ul li img {
@@ -28,6 +29,24 @@
             padding-right: 10px;
             border-radius: 50%;
         }
+
+        @keyframes spin {
+            0% {transform: rotate(0deg);}
+            100% {transform: rotate(360deg);}
+        }
+
+        #loading {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid #b1b1b1;
+            border-top-color: transparent;
+            margin-left: 10px;
+            animation: spin 1.2s linear infinite;
+        }
+
     </style>
 
 </head>
