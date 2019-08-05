@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import './styles.css';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Productize from '../../services/api';
+
+import './styles.css';
 
 class Main extends Component {
 
@@ -10,15 +12,13 @@ class Main extends Component {
         page: 1
     }
 
-    ProductService = new Productize();
-
     componentDidMount() {
         this.loadProducts();
         console.log(this)
     }
 
     loadProducts = async (page=1) => {
-        const response = await this.ProductService.list(page);
+        const response = await Productize.list(page);
         const { docs, ...productMeta } = response.data;
 
         this.setState({ products: docs, productMeta, page });
@@ -52,7 +52,7 @@ class Main extends Component {
         const { products, productMeta, page } = this.state;
 
         return(
-            <main id="main">
+            <main className="main">
                 <div className="actions">
                     <button disabled={page === 1} onClick={this.prevPage}>Previous</button>
                     <button disabled={page === productMeta.pages} onClick={this.nextPage}>Next</button>
@@ -62,7 +62,7 @@ class Main extends Component {
                         <article key={product._id}>
                             <h3>{product.title}</h3>
                             <p>{product.description}</p>
-                            <a href="">More</a>
+                            <Link to={`/products/${product._id}`}>More</Link>
                         </article>
                     ) )}
                 </div>
