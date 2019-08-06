@@ -1,11 +1,12 @@
 header#main-header {
+    background: #ffa500;
+}
+
+header .header-content {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background: #ffa500;
-    height: 42px;
+    justify-content: space-between;
     width: 100%;
-    padding: 8px;
 }
 
 header#main-header h1 {
@@ -13,4 +14,15 @@ header#main-header h1 {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 100;
+}
+
+a#create-btn {
+    padding: 10px;
+    background: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    font-weight: 100;
+    font-size: 14px;
 }

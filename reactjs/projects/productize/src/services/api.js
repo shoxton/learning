@@ -9,9 +9,19 @@ class Productize {
         return response;
     }
 
-    static async getById(id) {
+    static async show(id) {
         const response = await API.get(`/products/${id}`);
         return response;
+    }
+
+    static async update(product) {
+        const response = await API.put(`/products/${product._id}`, product );
+        console.log(response);
+    }
+
+    static async save(product) {
+        const response = await API.post(`/products`, product );
+        console.log(response);
     }
 
 }

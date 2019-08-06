@@ -11,3 +11,18 @@ body {
     background: #fafafa;
     color: #333;
 }
+
+.nav-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-actions a {
+    color: #757575;
+}
+
+.container {
+    max-width: 700px;
+    padding: 20px;
+    margin: 0 auto;
+}

@@ -52,7 +52,7 @@ class Main extends Component {
         const { products, productMeta, page } = this.state;
 
         return(
-            <main className="main">
+            <main className="container">
                 <div className="actions">
                     <button disabled={page === 1} onClick={this.prevPage}>Previous</button>
                     <button disabled={page === productMeta.pages} onClick={this.nextPage}>Next</button>

@@ -6,3 +6,37 @@
 .product-info a {
     color: #00a2ff;
 }
+
+.product-edit input {
+    background: transparent;
+    padding: 15px;
+    border-bottom: 2px solid #00a2ff;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.product-edit input:focus {
+    border-bottom: 2px solid #005f96;
+}
+
+.product-edit input[name=title] {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.product-edit input[name=description] {
+    font-size: 18px;
+}
+
+.product-edit input[name=url] {
+    font-size: 18px;
+}
+
+.nav-actions button {
+    background: #00a2ff;
+    padding: 10px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
