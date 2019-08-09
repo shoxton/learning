@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Main.css';
 
+import io from 'socket.io-client';
 import api from '../services/api';
 
 import logo from '../assets/logo.svg';
@@ -10,6 +11,10 @@ import like from '../assets/like.svg';
 
 export default function Main({match}) {
     const [ users, setUsers ] = useState([]);
+
+    useEffect(() => {
+        const socket = io('http://localhost:3333');
+    }, [match.params.id])
 
     useEffect(() => {
         async function loadUsers() {
