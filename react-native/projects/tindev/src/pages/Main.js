@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, Image, TouchableOpacity, StyleSheet  } from 'react-native';
 
+import io from 'socket.io-client';
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 
 import logo from '../assets/logo.png';
 import dislike from '../assets/dislike.png';
 import like from '../assets/like.png';
+import itsamatch from '../assets/itsamatch.png';
 
 export default function Main({ navigation }) {
     const id = navigation.getParam('user');
     const [users, setUsers] = useState([]);
+    const [matchDev, setMatchDev] = useState(null);
+
+    useEffect(() => {
+        const socket = io('http://localhost:3333', {
+            query: {user: id}
+        });
+
+        socket.on('match', dev => {
+            setMatchDev(dev);
+        })
+        
+    }, [id])
 
     useEffect(() => {
         async function loadUsers() {
@@ -77,6 +91,20 @@ export default function Main({ navigation }) {
                     </TouchableOpacity>
                 </View>
             ) }
+
+            { matchDev && (
+                <View style={styles.matchContainer}>
+                    <Image style={styles.matchImage} source={itsamatch} />
+
+                    <Image style={styles.matchAvatar} source={{uri: matchDev.avatar}} />
+                    <Text style={styles.matchName}>{matchDev.name}</Text>
+                    <Text style={styles.matchBio}>{matchDev.bio}</Text>
+
+                    <TouchableOpacity onPress={() => setMatchDev(null)}>
+                        <Text style={styles.closeMatchBtn}>Close</Text>
+                    </TouchableOpacity>
+                </View>
+            )}
         </SafeAreaView>
     );
 }
@@ -150,7 +178,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginHorizontal: 20,
-        elevation: 2,
+        borderColor: 'rgba(0,0,0,0.1)',
+        borderWidth: 2,
         shadowColor: '#000',
         shadowOpacity: 0.05,
         shadowRadius: 2,
@@ -164,6 +193,51 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: '#999',
         fontSize: 24,
+        fontWeight: 'bold'
+    },
+
+    matchContainer: {
+        ... StyleSheet.absoluteFillObject,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0, 0.9)',
+        zIndex: 9999
+    },
+
+    matchAvatar: {
+        height: 160,
+        width: 160,
+        borderRadius: 80,
+        borderWidth: 5,
+        borderColor: '#fff',
+        marginVertical: 30
+    },
+
+    matchImage: {
+        height: 60,
+        resizeMode: 'contain',
+    },
+
+    matchName: {
+        fontSize: 26,
+        color: '#fff',
+        fontWeight: 'bold'
+    },
+
+    matchBio: {
+        fontSize: 16,
+        color: 'rgba(255,255,255, 0.8)',
+        lineHeight: 20,
+        marginTop: 15,
+        paddingHorizontal: 30,
+        textAlign: 'center'
+    },
+
+    closeMatchBtn: {
+        marginTop: 30,
+        textTransform: 'uppercase',
+        color: 'rgba(255,255,255, 0.8)',
+        fontSize: 16,
         fontWeight: 'bold'
     }
 })
