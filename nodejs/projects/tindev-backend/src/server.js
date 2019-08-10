@@ -8,14 +8,24 @@ const app = express();
 const server = require('http').Server(app)
 const io = require('socket.io')(server);
 
+const connectedUsers = [];
+
 io.on('connection', socket => {
-    console.log("New connection", socket.id)
+    const { user } = socket.handshake.query;
+    connectedUsers[user] = socket.id;
 });
 
 const { login, pass, host, db } = require('../config');
 
 mongoose.connect(`mongodb+srv://${login}:${pass}@${host}/${db}?retryWrites=true&w=majority`, {
     useNewUrlParser: true
+})
+
+app.use((req, res, next) => {
+    req.io = io;
+    req.connectedUsers = connectedUsers;
+
+    return next();
 })
 
 app.use(cors());
