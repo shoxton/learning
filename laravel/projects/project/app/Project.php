@@ -9,10 +9,15 @@ class Project extends Model
     //Prevents mass assignment
     protected $fillable = [
         "title",
-        "description"
+        "description",
+        'owner_id'
     ];
 
     public function tasks() {
         return $this->hasMany(Task::class);
+    }
+
+    public function addTask($task) {
+        return $this->tasks()->create($task);
     }
 }

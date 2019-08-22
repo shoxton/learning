@@ -7,8 +7,15 @@ use App\Project;
 
 class ProjectsController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+        $this->middleware('can:update,project')
+            ->except(['index','create','store']);
+    }
+
     public function index() {
-        $projects = Project::all();
+        $projects = Project::where('owner_id',auth()->id())->get();
         return view('project.index', compact('projects'));
     }
 
@@ -18,12 +25,14 @@ class ProjectsController extends Controller
 
     public function store() {
 
-        $validatedAttributes = request()->validate([
+        $attributes = request()->validate([
             "title" => "required|min:3|max:50",
             "description" => "required|min:3"
         ]);
 
-        $project = Project::create($validatedAttributes);
+        $attributes['owner_id'] = auth()->id();
+
+        $project = Project::create($attributes);
 
         return redirect()->route('projects.show',[$project]);
     }

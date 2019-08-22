@@ -1,31 +1,37 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 
-    <h1 class="title">Create</h1>
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-8">
+          <div class="card">
+              <div class="card-header"><h1 class="title">Create</h1></div>
 
-    <form action="/projects" method="POST">
+              <div class="card-body">
 
-        @csrf
+                  <form action="/projects" method="POST">
 
-        <div class="form-group">
-          <input value="{{old('title')}}" type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title" id="" aria-describedby="helpId" placeholder="Title">
-        </div>
-        <div class="form-group">
-          <textarea placeholder="Description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="" rows="3">{{old('description')}}</textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+                      @csrf
+              
+                      <div class="form-group">
+                        <input required value="{{old('title')}}" type="text" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title" id="" aria-describedby="helpId" placeholder="Title">
+                      </div>
+                      <div class="form-group">
+                        <textarea required placeholder="Description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="" rows="3">{{old('description')}}</textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Create</button>
+            
+                  </form>
+            
+                  @include('errors')
+                  
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
 
-    </form>
 
-    @if($errors->any())
-      <ul class="alert alert-danger mt-3" role="alert">
-        
-        @foreach ($errors->all() as $error)
-          <li class="ml-3">{{$error}}</li>
-        @endforeach
-
-      </ul>
-    @endif
 
 @endsection
