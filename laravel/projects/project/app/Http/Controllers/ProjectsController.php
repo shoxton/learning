@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\Mail\ProjectCreated;
 
 class ProjectsController extends Controller
 {
@@ -15,8 +16,7 @@ class ProjectsController extends Controller
     }
 
     public function index() {
-        $projects = Project::where('owner_id',auth()->id())->get();
-        return view('project.index', compact('projects'));
+        return view('project.index', ['projects' => auth()->user()->projects]);
     }
 
     public function create() {
@@ -24,21 +24,22 @@ class ProjectsController extends Controller
     }
 
     public function store() {
-
-        $attributes = request()->validate([
-            "title" => "required|min:3|max:50",
-            "description" => "required|min:3"
-        ]);
+        
+        $attributes = $this->validateProject();
 
         $attributes['owner_id'] = auth()->id();
 
         $project = Project::create($attributes);
 
+        // \Mail::to('andre@example.com')->send(
+        //     new ProjectCreated($project)
+        // );
+
         return redirect()->route('projects.show',[$project]);
     }
 
     public function update(Project $project) {
-        $project->update(request(["title","description"]));
+        $project->update($this->validateProject());
 
         return redirect()->route('projects.show',[$project]);
     }
@@ -55,5 +56,12 @@ class ProjectsController extends Controller
         $project->delete();
 
         return redirect('/projects');
+    }
+
+    public function validateProject() {
+        return request()->validate([
+            "title" => "required|min:3|max:50",
+            "description" => "required|min:3"
+        ]);
     }
 }

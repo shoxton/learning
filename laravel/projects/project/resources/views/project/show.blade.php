@@ -21,14 +21,14 @@
 
                         @csrf
         
-                        <input required name="description" style="flex:1" class="form-control mr-sm-2 {{ $errors->has('description') ? 'is-invalid' : '' }}" type="search" placeholder="Add new task">
+                        <input name="description" style="flex:1" class="form-control mr-sm-2 {{ $errors->has('description') ? 'is-invalid' : '' }}" type="search" placeholder="Add new task">
                         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Add</button>
         
-                        @if($errors->has('description'))
+                        @error('description')
                             <div class="invalid-feedback">
                                 Please provide a description.
                             </div>
-                        @endif
+                        @enderror
         
                     </form>
                     @if($project->tasks->count())

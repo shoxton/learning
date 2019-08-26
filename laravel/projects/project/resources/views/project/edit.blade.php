@@ -16,18 +16,29 @@
                       @csrf
               
                       <div class="form-group">
-                        <label for=""></label>
-                      <input type="text" value="{{$project->title}}" class="form-control" name="title" id="" aria-describedby="helpId" placeholder="Title">
+                        <input required type="text" value="{{$project->title}}" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }} " name="title" aria-describedby="helpId" placeholder="Title">
+                        
+                        @error('title')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                        @enderror
+
                       </div>
+
                       <div class="form-group">
-                        <label for=""></label>
-                        <textarea placeholder="Description" class="form-control" name="description" id="" rows="3">{{$project->description}}</textarea>
+                        <textarea required placeholder="Description" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }} " name="description" rows="3">{{$project->description}}</textarea>
+                      
+                        @error('description')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                        @enderror
+
                       </div>
+
                       <div class="d-flex justify-content-between align-items-center">
-                        <button onclick="window.history.back();"type="button" class="btn btn-default"
-                          >
-                            Cancel
-                          </button>
+                        <a href="/projects"><button type="button" class="btn btn-default">Cancel</button></a>
                         <div>
                           <button type="button" class="btn btn-danger" onclick="
                                 event.preventDefault();
